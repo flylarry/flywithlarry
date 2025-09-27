@@ -47,14 +47,14 @@ export function UserAvatar() {
             variant="ghost"
             size="sm"
             onClick={handleSignIn}
-            className="text-gray-700 hover:text-gray-900"
+            className="text-gray-700 hover:text-gray-900 text-sm font-medium"
           >
             Login
           </Button>
           <Button
             size="sm"
             onClick={handleSignUp}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-blue-600 hover:bg-blue-700 text-sm font-medium"
           >
             Sign Up
           </Button>
