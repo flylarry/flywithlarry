@@ -29,15 +29,15 @@ export default function AboutPage() {
             </h2>
             <p className="text-gray-700 mb-4">
               Larry was inspired by something deeply personal. For years, I struggled with flight anxiety. 
-              Every time turbulence hit or nerves rose, I'd text my dad - Larry. Without fail, he'd respond 
+              Every time turbulence hit or nerves rose, I&apos;d text my dad - Larry. Without fail, he&apos;d respond 
               with calm, comforting words that made me feel safe and understood. His encouragement, empathy, 
               and simple presence turned fear into something I could manage. Sometimes it even brought me 
-              to tears, just knowing I wasn't alone up there.
+              to tears, just knowing I wasn&apos;t alone up there.
             </p>
             <p className="text-gray-700 mb-4">
-              This experience showed me the power of having someone steady to lean on in the sky. That's 
+              This experience showed me the power of having someone steady to lean on in the sky. That&apos;s 
               why we built Larry: to share that same feeling of reassurance with anyone who needs it. 
-              A companion in your pocket, ready to soothe, ground, and remind you - you're safe.
+              A companion in your pocket, ready to soothe, ground, and remind you - you&apos;re safe.
             </p>
           </section>
 
@@ -93,7 +93,7 @@ export default function AboutPage() {
               Why Choose Larry AI?
             </h2>
             <p className="text-gray-700 mb-4">
-              We're not just another travel app. Larry AI is specifically designed 
+              We&apos;re not just another travel app. Larry AI is specifically designed 
               for travelers who experience flight anxiety, providing:
             </p>
             <ul className="list-disc list-inside text-gray-700 mb-4 space-y-2">
@@ -111,7 +111,7 @@ export default function AboutPage() {
               Our Commitment
             </h2>
             <p className="text-gray-700 mb-4">
-              We're committed to making air travel more accessible and comfortable 
+              We&apos;re committed to making air travel more accessible and comfortable 
               for everyone. Our team continuously works to improve our platform, 
               expand our data sources, and enhance the user experience based on 
               real user feedback and the latest developments in aviation technology.
@@ -128,7 +128,7 @@ export default function AboutPage() {
               Get in Touch
             </h2>
             <p className="text-gray-700 mb-4">
-              Have questions, feedback, or suggestions? We'd love to hear from you. 
+              Have questions, feedback, or suggestions? We&apos;d love to hear from you. 
               Your input helps us make Larry AI better for everyone.
             </p>
             <p className="text-gray-700">
