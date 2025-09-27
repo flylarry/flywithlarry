@@ -31,6 +31,7 @@ interface SettingsClientProps {
 
 export default function SettingsClient({ user }: SettingsClientProps) {
   const [fullName, setFullName] = useState(user.full_name || "");
+  const [hometown, setHometown] = useState(user.hometown || "");
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -52,7 +53,10 @@ export default function SettingsClient({ user }: SettingsClientProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ full_name: fullName.trim() }),
+        body: JSON.stringify({ 
+          full_name: fullName.trim(),
+          hometown: hometown.trim() || null
+        }),
       });
 
       const data = await response.json();
@@ -144,7 +148,9 @@ export default function SettingsClient({ user }: SettingsClientProps) {
     }
   };
 
-  const hasChanges = fullName !== (user.full_name || "");
+  const hasChanges = 
+    fullName !== (user.full_name || "") || 
+    hometown !== (user.hometown || "");
 
   return (
     <div className="flex flex-col gap-4">
@@ -198,6 +204,22 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Enter your full name"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="hometown"
+                className="text-xs sm:text-sm font-medium text-gray-700"
+              >
+                Hometown
+              </label>
+              <Input
+                id="hometown"
+                type="text"
+                value={hometown}
+                onChange={(e) => setHometown(e.target.value)}
+                placeholder="Enter your hometown"
               />
             </div>
 

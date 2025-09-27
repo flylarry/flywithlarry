@@ -7,6 +7,10 @@ const updateProfileSchema = z.object({
     .string()
     .min(1, "Name cannot be empty")
     .max(100, "Name is too long"),
+  hometown: z
+    .string()
+    .max(100, "Hometown is too long")
+    .optional(),
 });
 
 const deleteProfileSchema = z.object({
@@ -72,6 +76,7 @@ export async function PUT(request: NextRequest) {
       .from("users")
       .update({
         full_name: validatedData.full_name,
+        hometown: validatedData.hometown,
         updated_at: new Date().toISOString(),
       })
       .eq("id", user.id)
