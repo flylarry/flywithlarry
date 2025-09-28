@@ -152,7 +152,7 @@ function ChatInput(props: {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onStop?: () => void;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   loading?: boolean;
   placeholder?: string;
   children?: ReactNode;
@@ -174,13 +174,19 @@ function ChatInput(props: {
       }}
       className={cn("flex w-full flex-col", props.className)}
     >
-      <div className="border border-input bg-background rounded-lg flex items-center gap-2 max-w-[768px] w-full mx-auto p-2">
-        <input
+      <div className="border border-input bg-background rounded-lg flex items-start gap-2 max-w-[768px] w-full mx-auto p-2">
+        <textarea
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
           disabled={disabled}
-          className="flex-1 bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex-1 bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 resize-none min-h-[20px] max-h-[120px] overflow-y-auto"
+          rows={1}
+          onInput={(e) => {
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = 'auto';
+            target.style.height = Math.min(target.scrollHeight, 120) + 'px';
+          }}
         />
         {props.children}
         {props.actions}

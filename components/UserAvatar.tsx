@@ -99,6 +99,13 @@ export function UserAvatar() {
         </div>
 
         <DropdownMenuSeparator />
+        <Link href="/profile">
+          <DropdownMenuItem className="cursor-pointer">
+            <User className="mr-2 h-4 w-4" />
+            <span>Profile</span>
+          </DropdownMenuItem>
+        </Link>
+
         <Link href="/chat">
           <DropdownMenuItem className="cursor-pointer">
             <MessageCircle className="mr-2 h-4 w-4" />

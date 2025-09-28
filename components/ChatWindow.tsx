@@ -179,7 +179,7 @@ export function ChatInput(props: {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onStop?: () => void;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   loading?: boolean;
   placeholder?: string;
   children?: ReactNode;
@@ -201,12 +201,18 @@ export function ChatInput(props: {
       }}
       className={cn("flex w-full flex-col", props.className)}
     >
-      <div className="border border-input bg-background rounded-lg flex items-center gap-2 max-w-[768px] w-full mx-auto p-2">
-        <input
+      <div className="border border-input bg-background rounded-lg flex items-start gap-2 max-w-[768px] w-full mx-auto p-2">
+        <textarea
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
-          className="flex-1 border-none outline-none bg-transparent px-3 py-1"
+          className="flex-1 border-none outline-none bg-transparent px-3 py-2 resize-none min-h-[20px] max-h-[120px] overflow-y-auto"
+          rows={1}
+          onInput={(e) => {
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = 'auto';
+            target.style.height = Math.min(target.scrollHeight, 120) + 'px';
+          }}
         />
         {props.children}
         {props.actions}
