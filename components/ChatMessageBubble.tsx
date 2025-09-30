@@ -14,21 +14,21 @@ export function ChatMessageBubble(props: {
   return (
     <div
       className={cn(
-        `rounded-[24px] max-w-[80%] flex`,
+        `rounded-[24px] max-w-[90%] sm:max-w-[80%] flex`,
         props.message.role === "user"
-          ? "bg-blue-50 border border-blue-200 text-secondary-foreground px-4 py-2"
+          ? "bg-blue-50 border border-blue-200 text-secondary-foreground px-3 sm:px-4 py-2"
           : null,
         props.message.role === "user" ? "ml-auto" : "mr-auto",
         props.showTimestamp ? "mb-8" : "mb-2",
       )}
     >
       {props.message.role !== "user" && props.showAvatar && (
-        <div className="mr-4 border bg-background -mt-2 rounded-full w-10 h-10 flex-shrink-0 flex items-center justify-center">
-          <LarryIcon className="w-6 h-6" />
+        <div className="mr-2 sm:mr-4 border bg-background -mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 flex items-center justify-center">
+          <LarryIcon className="w-4 h-4 sm:w-6 sm:h-6" />
         </div>
       )}
       {props.message.role !== "user" && !props.showAvatar && (
-        <div className="mr-4 w-10 h-10 flex-shrink-0"></div>
+        <div className="mr-2 sm:mr-4 w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0"></div>
       )}
 
       <div className="flex flex-col">
@@ -37,7 +37,7 @@ export function ChatMessageBubble(props: {
             {props.message.content}
           </span>
         ) : (
-          <div className="prose prose-sm max-w-none bg-gray-100 border border-gray-200 p-3 rounded-lg text-gray-800">
+          <div className="prose prose-sm max-w-none bg-gray-100 border border-gray-200 p-2 sm:p-3 rounded-lg text-gray-800">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

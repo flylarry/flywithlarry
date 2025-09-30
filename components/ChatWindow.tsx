@@ -28,6 +28,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import type { Chat, Message as DBMessage } from "@/types/user";
 import { ChatSidebar } from "./ChatSidebar";
+import { MobileSidebarToggle } from "./MobileSidebarToggle";
 
 function ChatMessages(props: {
   messages: Message[];
@@ -138,7 +139,7 @@ function ChatMessages(props: {
   }, [props.isLoading, scrollToBottom]);
 
   return (
-    <div className="flex flex-col max-w-[768px] mx-auto pb-2 w-full">
+    <div className="flex flex-col max-w-[768px] mx-auto pb-2 w-full px-2 sm:px-4">
       {filteredMessages.length === 0 && !props.isLoading ? (
         props.emptyStateComponent
       ) : (
@@ -207,7 +208,7 @@ export function ChatInput(props: {
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
-          className="flex-1 border-none outline-none bg-transparent px-3 py-2 resize-none min-h-[20px] max-h-[120px] overflow-y-auto"
+          className="flex-1 border-none outline-none bg-transparent px-2 sm:px-3 py-2 resize-none min-h-[20px] max-h-[120px] overflow-y-auto text-sm sm:text-base"
           rows={1}
           onInput={(e) => {
             const target = e.target as HTMLTextAreaElement;
@@ -274,11 +275,11 @@ export function ChatLayout(props: { content: ReactNode; footer: ReactNode }) {
     <StickToBottom>
       <StickyToBottomContent
         className="h-full"
-        contentClassName="py-8 px-2 pb-32"
+        contentClassName="py-8 px-2 sm:px-4 pb-32"
         content={props.content}
         footer={
-          <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-4 z-10">
-            <div className="max-w-[768px] mx-auto">
+          <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-2 sm:p-4 z-10">
+            <div className="max-w-[768px] mx-auto px-2 sm:px-4">
               <ScrollToBottom className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4" />
               {props.footer}
             </div>
@@ -771,12 +772,14 @@ export function ChatWindow(props: {
 
   return (
     <div className="flex h-full">
-      <ChatSidebar onQuickAction={handleQuickAction} />
-      <div className="flex-1 flex flex-col">
+      <div className="hidden sm:block">
+        <ChatSidebar onQuickAction={handleQuickAction} />
+      </div>
+      <div className="flex-1 flex flex-col min-w-0">
         <ChatLayout
           content={
             showAuthCTA && isHydrated ? (
-              <div className="flex flex-col max-w-[768px] mx-auto pb-6 w-full">
+              <div className="flex flex-col max-w-[768px] mx-auto pb-6 w-full px-2 sm:px-4">
                 <ChatMessages
                   messages={chat.messages}
                   emptyStateComponent={props.emptyStateComponent}
@@ -848,6 +851,7 @@ export function ChatWindow(props: {
           </ChatInput>
         }
         />
+        <MobileSidebarToggle onQuickAction={handleQuickAction} />
       </div>
     </div>
   );

@@ -104,13 +104,13 @@ export function ChatSidebar({ onQuickAction, className }: ChatSidebarProps) {
   return (
     <div className={cn(
       "flex flex-col h-full bg-white border-r border-gray-200 transition-all duration-300",
-      isCollapsed ? "w-16" : "w-80",
+      isCollapsed ? "w-16" : "w-80 lg:w-80 md:w-64 sm:w-56",
       className
     )}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         {!isCollapsed && (
-          <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
+          <h2 className="text-lg font-semibold text-gray-900 hidden sm:block">Quick Actions</h2>
         )}
         <Button
           variant="ghost"
@@ -123,22 +123,22 @@ export function ChatSidebar({ onQuickAction, className }: ChatSidebarProps) {
       </div>
 
       {/* Quick Actions */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-4">
         {!isCollapsed && (
           <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Chat with Larry</h3>
+            <h3 className="text-sm font-medium text-gray-700 mb-3 hidden sm:block">Chat with Larry</h3>
             {quickActions.map((action) => {
               const Icon = action.icon;
               return (
                 <Card key={action.id} className="hover:shadow-md transition-shadow cursor-pointer">
-                  <CardContent className="p-3" onClick={action.action}>
-                    <div className="flex items-center space-x-3">
+                  <CardContent className="p-2 sm:p-3" onClick={action.action}>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
                       <div className="flex-shrink-0">
-                        <Icon className="w-5 h-5 text-blue-600" />
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900">{action.label}</p>
-                        <p className="text-xs text-gray-500">{action.description}</p>
+                        <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">{action.label}</p>
+                        <p className="text-xs text-gray-500 hidden sm:block">{action.description}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -171,7 +171,7 @@ export function ChatSidebar({ onQuickAction, className }: ChatSidebarProps) {
         {/* Navigation */}
         <div className="pt-4 border-t border-gray-200">
           {!isCollapsed && (
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Navigate</h3>
+            <h3 className="text-sm font-medium text-gray-700 mb-3 hidden sm:block">Navigate</h3>
           )}
           <div className="space-y-2">
             {navigationItems.map((item) => {
@@ -184,12 +184,12 @@ export function ChatSidebar({ onQuickAction, className }: ChatSidebarProps) {
                   onClick={item.action}
                   className={cn(
                     "w-full justify-start",
-                    isCollapsed ? "justify-center p-3" : "p-3"
+                    isCollapsed ? "justify-center p-2 sm:p-3" : "p-2 sm:p-3"
                   )}
                   title={isCollapsed ? item.label : undefined}
                 >
-                  <Icon className="w-5 h-5 text-gray-600" />
-                  {!isCollapsed && <span className="ml-3">{item.label}</span>}
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
+                  {!isCollapsed && <span className="ml-2 sm:ml-3 text-xs sm:text-sm truncate">{item.label}</span>}
                 </Button>
               );
             })}
