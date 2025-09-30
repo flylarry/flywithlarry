@@ -27,6 +27,7 @@ import { AuthCTA } from "./AuthCTA";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import type { Chat, Message as DBMessage } from "@/types/user";
+import { ChatSidebar } from "./ChatSidebar";
 
 function ChatMessages(props: {
   messages: Message[];
@@ -757,34 +758,47 @@ export function ChatWindow(props: {
     }
   }
 
+  const handleQuickAction = (message: string) => {
+    chat.setInput(message);
+    // Trigger send after a brief delay to ensure input is set
+    setTimeout(() => {
+      const form = document.querySelector('form') as HTMLFormElement;
+      if (form) {
+        form.requestSubmit();
+      }
+    }, 100);
+  };
+
   return (
-    <div className="flex flex-col h-full">
-      <ChatLayout
-        content={
-          showAuthCTA && isHydrated ? (
-            <div className="flex flex-col max-w-[768px] mx-auto pb-6 w-full">
+    <div className="flex h-full">
+      <ChatSidebar onQuickAction={handleQuickAction} />
+      <div className="flex-1 flex flex-col">
+        <ChatLayout
+          content={
+            showAuthCTA && isHydrated ? (
+              <div className="flex flex-col max-w-[768px] mx-auto pb-6 w-full">
+                <ChatMessages
+                  messages={chat.messages}
+                  emptyStateComponent={props.emptyStateComponent}
+                  sourcesForMessages={sourcesForMessages}
+                  isLoading={isWaitingForResponse}
+                />
+                <div className="">
+                  <AuthCTA
+                    remainingMessages={getRemainingMessages()}
+                    context="limit"
+                  />
+                </div>
+              </div>
+            ) : (
               <ChatMessages
                 messages={chat.messages}
                 emptyStateComponent={props.emptyStateComponent}
                 sourcesForMessages={sourcesForMessages}
                 isLoading={isWaitingForResponse}
               />
-              <div className="">
-                <AuthCTA
-                  remainingMessages={getRemainingMessages()}
-                  context="limit"
-                />
-              </div>
-            </div>
-          ) : (
-            <ChatMessages
-              messages={chat.messages}
-              emptyStateComponent={props.emptyStateComponent}
-              sourcesForMessages={sourcesForMessages}
-              isLoading={isWaitingForResponse}
-            />
-          )
-        }
+            )
+          }
         footer={
           <ChatInput
             value={chat.input}
@@ -833,7 +847,8 @@ export function ChatWindow(props: {
             )}
           </ChatInput>
         }
-      />
+        />
+      </div>
     </div>
   );
 }
